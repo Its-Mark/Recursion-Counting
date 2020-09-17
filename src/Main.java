@@ -14,6 +14,11 @@ public class Main {
         
     }
 
+    public static int gcd(int a, int b, int n){
+        int p = 0;
+        return gcd(a, b, n, p);
+    }
+
     /**
      * Recursive Method for Greatest Common Divisor
      * @param a = an int from file
@@ -22,7 +27,7 @@ public class Main {
      * @param p = points
      * @return the gcd
      */
-    public static int gcd(int a, int b, int n, int p){
+    private static int gcd(int a, int b, int n, int p){
 
         if (a == 0){
             // #1 gcd(0,b) = b
