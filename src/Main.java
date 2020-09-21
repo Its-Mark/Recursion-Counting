@@ -25,17 +25,17 @@ public class Main {
      * @param b = an int from file
      * @param n = easily divisible number from file
      * @param p = points
-     * @return the gcd
+     * @return the total "points" a number gets
      */
     private static int gcd(int a, int b, int n, int p){
 
         if (a == 0){
             // #1 gcd(0,b) = b
-            return b;
+            return p;
 
         } else if (b == 0){
             // #1 gcd(a,0) = a
-            return a;
+            return p;
 
         } else if (a % n == 0 && b % n == 0){
             // #n if a & b are both even then gcd(a,b) = gcd(a/n,b/n)
@@ -58,7 +58,7 @@ public class Main {
 
         }
 
-        return -1;
+        return p;
     }
 
 }
