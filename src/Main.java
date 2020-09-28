@@ -1,7 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
+import java.math.BigInteger;
 
 /**
  * Project 2 for CECS 328
@@ -11,10 +13,34 @@ import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args){
-        
+        try {
+            File in = new File("inputTest.txt");
+            Scanner scan = new Scanner(in);
+            ArrayList<BigInteger> ezd = new ArrayList<>();
+            ArrayList<BigInteger> ab = new ArrayList<>();
+            while(scan.hasNextLine()){
+                String line = scan.nextLine();
+                if(line.contains(" ")){
+                    Scanner s = new Scanner(line);
+                    while(s.hasNext()){
+                        ab.add(new BigInteger(s.next()));
+                    }
+                } else {
+                    ezd.add(new BigInteger(line));
+                }
+            }
+            //System.out.println(ab);
+            //System.out.println(ezd);
+            System.out.println(gcd(ab.get(0), ab.get(1), ezd.get(0)));
+
+        } catch (FileNotFoundException fnfe) {
+            fnfe.printStackTrace();
+        }
+
+
     }
 
-    public static int gcd(int a, int b, int n){
+    public static int gcd(BigInteger a, BigInteger b, BigInteger n){
         int p = 0;
         return gcd(a, b, n, p);
     }
@@ -27,34 +53,44 @@ public class Main {
      * @param p = points
      * @return the total "points" a number gets
      */
-    private static int gcd(int a, int b, int n, int p){
+    private static int gcd(BigInteger a, BigInteger b, BigInteger n, int p){
 
-        if (a == 0){
+        if (a.compareTo(BigInteger.ZERO) == 0){
             // #1 gcd(0,b) = b
             return p;
 
-        } else if (b == 0){
+        } else if (b.compareTo(BigInteger.ZERO) == 0){
             // #1 gcd(a,0) = a
-            return p;
-
-        } else if (a % n == 0 && b % n == 0){
+            int p1 = p;
+            return p1;
+            
+        } else if ((a.mod(n)).compareTo(BigInteger.ZERO) == 0 && (b.mod(n)).compareTo(BigInteger.ZERO) == 0){
             // #n if a & b are both even then gcd(a,b) = gcd(a/n,b/n)
             p += 2;
-            return gcd(a / n, b / n, n, p);
+            return gcd(a.divide(n), b.divide(n), n, p);
 
-        } else if (a % n == 0 && b % n != 0){
+        } else if ((a.mod(n)).compareTo(BigInteger.ZERO)  == 0 && (b.mod(n)).compareTo(BigInteger.ZERO) != 0){
             // #3 if a IS even and b IS NOT then gcd(a,b) = gcd(a/n,b)
             p += 1;
-            return gcd(a / n, b, n, p);
+            return gcd(a.divide(n), b, n, p);
 
-        } else if (a % n != 0 && b % n == 0){
+        } else if ((a.mod(n)).compareTo(BigInteger.ZERO) != 0 && (b.mod(n)).compareTo(BigInteger.ZERO) == 0){
             // #3 if a IS NOT even and b IS then gcd(a,b) = gcd(a,b/n)
             p += 1;
-            return gcd(a, b / n, n, p);
+            return gcd(a, b.divide(n), n, p);
 
-        } else if (a % n != 0 && b % n != 0){
+        } else if ((a.mod(n)).compareTo(BigInteger.ZERO) != 0 && (b.mod(n)).compareTo(BigInteger.ZERO) != 0){
             // #4 if both a & b are odd then gcd(a,b) = gcd(max{a,b} - min{a,b}, min{a,b})
-            return gcd((Math.max(a,b) - Math.min(a,b)), Math.min(a,b), n, p);
+            BigInteger max;
+            BigInteger min;
+            if(a.compareTo(b) > 0){
+                max = a;
+                min = b;
+            } else {
+                max = b;
+                min = a;
+            }
+            return gcd(max.subtract(min), min, n, p);
 
         }
 
