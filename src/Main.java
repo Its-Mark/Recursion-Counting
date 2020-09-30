@@ -14,9 +14,9 @@ import java.math.BigInteger;
 public class Main {
     public static void main(String[] args){
         try {
-            File in = new File("inputTest.txt");
+            File in = new File("input.txt");
             Scanner scan = new Scanner(in);
-            File out = new File("output1.txt");
+            File out = new File("output.txt");
             PrintWriter pw = new PrintWriter(out);
             ArrayList<BigInteger> ezd = new ArrayList<>();
             ArrayList<BigInteger> ab = new ArrayList<>();
