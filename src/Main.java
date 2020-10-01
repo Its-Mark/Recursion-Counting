@@ -32,8 +32,8 @@ public class Main {
                     ezd.add(new BigInteger(line));
                 }
             }
-            System.out.println(ab);
-            System.out.println(ezd);
+            //System.out.println(ab);
+            //System.out.println(ezd);
             for(int i = 1; i < ezd.size(); i++){
                 System.out.println("Getting points for: " + ezd.get(i));
                 int sumPoints = 0;
@@ -59,8 +59,8 @@ public class Main {
 
     private static int gcd(BigInteger a, BigInteger b, BigInteger n, int p){
         //Variable to see whats currently being tested
-        String current = "[" + a.toString() + ", " + b.toString() + "]" + " Current Points: " + p;
-        System.out.println(current);
+        //String current = "[" + a.toString() + ", " + b.toString() + "]" + " Current Points: " + p;
+        //System.out.println(current);
         if(a.compareTo(BigInteger.ZERO) == 0){
             return p;
 
@@ -78,20 +78,20 @@ public class Main {
             System.out.println("A DIVISIBLE B IS NOT ADD 1 POINT");
             BigInteger na = a.divide(n);
             int np = p+1;
-            if(na.equals(b)){
+            /*if(na.equals(b)){
                 System.out.println("LAST ITERATION NO POINTS AWARDED");
                 np -= 1;
-            }
+            }*/
             return gcd(na, b, n, np);
 
         } else if((b.mod(n)).compareTo(BigInteger.ZERO) == 0){
             System.out.println("A IS NOT B DIVISIBLE ADD 1 POINT");
             BigInteger nb = b.divide(n);
             int np = p+1;
-            if(nb.equals(a)){
+            /*if(nb.equals(a)){
                 System.out.println("LAST ITERATION NO POINTS AWARDED");
                 np -= 1;
-            }
+            }*/
             return gcd(a, nb, n, np);
         } else {
             System.out.println("NEITHER DIVISIBLE");
